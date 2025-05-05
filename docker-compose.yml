@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  # FastAPI application
+  api:
+    build: .
+    container_name: sentiment-api
+    restart: always
+    networks:
+      - app-network
+  
+  # Nginx service
+  nginx:
+    image: nginx:1.23-alpine
+    container_name: sentiment-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - api
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

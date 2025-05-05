@@ -1,1 +1,6 @@
 .venv
+.config
+bert_base_train_dir
+bert-base-uncased-sentiment-model
+logs
+wandb
